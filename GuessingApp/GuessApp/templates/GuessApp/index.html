@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Guessing Game</title>
+    </head>
+    <body>
+        <h1>Guess the number</h1>
+        {% if message %}
+            {{ message }}
+        {% endif %}
+        <form action="{% url 'GuessApp:index' %}" method="post">
+            {% csrf_token %}
+            <input type="number" name="guess" autofocus >
+            <input type="submit" value="Guess">
+            <input type="submit" name="again" value="Play Again">
+        </form>
+        <h3>Previous Guesses</h3>
+        <ol reversed >
+            {% for guess in guesses %}
+                <li>{{ guess }}</li>
+            {% empty %}
+                No guesses
+            {% endfor %}
+        </ol>
+    </body>
+</html>
